@@ -14,7 +14,7 @@ function App() {
   const [loginError, setLoginError] = useState("");
 
   const [form, setForm] = useState({
-   registration_type: "Squad",
+    registration_type: "Squad",
     team_name: "",
     captain_name: "",
     whatsapp: "",
@@ -172,7 +172,7 @@ function App() {
 
     const { error } = await supabase.from("teams").insert([
       {
-       registration_type: form.registration_type,
+        registration_type: form.registration_type,
         team_name: form.team_name,
         captain_name: form.captain_name,
         whatsapp: form.whatsapp,
@@ -197,7 +197,7 @@ function App() {
     setMessage("✅ Team registered successfully!");
 
     setForm({
-     registration_type: "Squad",
+      registration_type: "Squad",
       team_name: "",
       captain_name: "",
       whatsapp: "",
@@ -266,17 +266,18 @@ function App() {
             <form className="registration-form" onSubmit={handleSubmit}>
               <label>Registration Type</label>
 
-<select
-  name="registration_type"
-  value={form.registration_type}
-  onChange={handleChange}
-  required
->
-  <option value="Solo">🧍 Solo</option>
-  <option value="Duo">👥 Duo</option>
-  <option value="Squad">👥 Squad</option>
-</select>
-<input
+              <select
+                name="registration_type"
+                value={form.registration_type}
+                onChange={handleChange}
+                required
+              >
+                <option value="Solo">🧍 Solo</option>
+                <option value="Duo">👥 Duo</option>
+                <option value="Squad">👥 Squad</option>
+              </select>
+
+              <input
                 name="team_name"
                 placeholder="Guild Name"
                 value={form.team_name}
@@ -310,45 +311,45 @@ function App() {
               />
 
               {(form.registration_type === "Duo" ||
-  form.registration_type === "Squad") && (
-  <input
-    name="player2"
-    placeholder="Player 2 Name"
-    value={form.player2}
-    onChange={handleChange}
-    required
-  />
-)}
+                form.registration_type === "Squad") && (
+                <input
+                  name="player2"
+                  placeholder="Player 2 Name"
+                  value={form.player2}
+                  onChange={handleChange}
+                  required
+                />
+              )}
 
-         {form.registration_type === "Squad" && (
-  <input
-    name="player3"
-    placeholder="Player 3 Name"
-    value={form.player3}
-    onChange={handleChange}
-    required
-  />
-)}     
+              {form.registration_type === "Squad" && (
+                <input
+                  name="player3"
+                  placeholder="Player 3 Name"
+                  value={form.player3}
+                  onChange={handleChange}
+                  required
+                />
+              )}
 
-  {form.registration_type === "Squad" && (
-  <input
-    name="player4"
-    placeholder="Player 4 Name"
-    value={form.player4}
-    onChange={handleChange}
-    required
-  />
-)}        
+              {form.registration_type === "Squad" && (
+                <input
+                  name="player4"
+                  placeholder="Player 4 Name"
+                  value={form.player4}
+                  onChange={handleChange}
+                  required
+                />
+              )}
 
-      {form.registration_type === "Squad" && (
-  <input
-    name="player5"
-    placeholder="Player 5 Name"
-    value={form.player5}
-    onChange={handleChange}
-    required
-  />
-)}        
+              {form.registration_type === "Squad" && (
+                <input
+                  name="player5"
+                  placeholder="Player 5 Name"
+                  value={form.player5}
+                  onChange={handleChange}
+                  required
+                />
+              )}
 
               <label>Team Logo</label>
 
@@ -358,6 +359,15 @@ function App() {
                 onChange={handleLogoChange}
                 required
               />
+
+              <label>💳 Registration Payment</label>
+
+              <a
+                href="upi://pay?pa=9067865439-4@ybl&pn=4UL%20Esports%20India&cu=INR"
+                className="payment-button"
+              >
+                💳 PAY NOW WITH UPI
+              </a>
 
               <label>Payment Screenshot</label>
 
@@ -440,10 +450,12 @@ function App() {
                   teams.map((team) => (
                     <div className="card" key={team.id}>
                       <h3>🏆 {team.team_name}</h3>
-<p>
-  <strong>Registration Type:</strong>{" "}
-  {team.registration_type || "Squad"}
-</p>
+
+                      <p>
+                        <strong>Registration Type:</strong>{" "}
+                        {team.registration_type || "Squad"}
+                      </p>
+
                       <p>
                         <strong>Captain:</strong>{" "}
                         {team.captain_name}
