@@ -1,3 +1,4 @@
+```jsx
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "./App.css";
@@ -19,15 +20,10 @@ function App() {
     captain_name: "",
     whatsapp: "",
     player1: "",
-    player1_uid: "",
     player2: "",
-    player2_uid: "",
     player3: "",
-    player3_uid: "",
     player4: "",
-    player4_uid: "",
     player5: "",
-    player5_uid: "",
     utr_number: "",
   });
 
@@ -143,8 +139,10 @@ function App() {
 
     setMessage("Registering...");
 
-    const logoName = `${Date.now()}-${logoFile.name}`;
-    const paymentName = `${Date.now()}-${paymentFile.name}`;
+    const timestamp = Date.now();
+
+    const logoName = `${timestamp}-${logoFile.name}`;
+    const paymentName = `${timestamp}-${paymentFile.name}`;
 
     const { error: logoError } = await supabase.storage
       .from("team-logos")
@@ -180,22 +178,11 @@ function App() {
         team_name: form.team_name,
         captain_name: form.captain_name,
         whatsapp: form.whatsapp,
-
         player1: form.player1,
-        player1_uid: form.player1_uid,
-
         player2: form.player2,
-        player2_uid: form.player2_uid,
-
         player3: form.player3,
-        player3_uid: form.player3_uid,
-
         player4: form.player4,
-        player4_uid: form.player4_uid,
-
         player5: form.player5,
-        player5_uid: form.player5_uid,
-
         logo_url: logoData.publicUrl,
         payment_screenshot_url: paymentData.publicUrl,
         utr_number: form.utr_number,
@@ -217,15 +204,10 @@ function App() {
       captain_name: "",
       whatsapp: "",
       player1: "",
-      player1_uid: "",
       player2: "",
-      player2_uid: "",
       player3: "",
-      player3_uid: "",
       player4: "",
-      player4_uid: "",
       player5: "",
-      player5_uid: "",
       utr_number: "",
     });
 
@@ -233,11 +215,15 @@ function App() {
     setPaymentFile(null);
 
     e.target.reset();
+
     fetchTeams();
   };
 
   return (
     <div className="app">
+
+      {/* HEADER */}
+
       <header className="header">
         <div className="logo">
           4UL <span>ESPORTS INDIA</span>
@@ -252,8 +238,12 @@ function App() {
       </header>
 
       <main>
+
+        {/* HERO */}
+
         <section className="hero-section" id="home">
           <div className="hero-content">
+
             <h1>
               4UL <span>ESPORTS INDIA</span>
             </h1>
@@ -264,26 +254,52 @@ function App() {
             </p>
 
             <div className="hero-buttons">
-              <a href="#register" className="btn btn-primary">
+
+              <a
+                href="#register"
+                className="btn btn-primary"
+              >
                 REGISTER NOW
               </a>
 
-              <a href="#about" className="btn btn-secondary">
+              <a
+                href="#about"
+                className="btn btn-secondary"
+              >
                 ABOUT US
               </a>
+
             </div>
+
           </div>
         </section>
 
+        {/* REGISTRATION */}
+
         <section className="section" id="register">
+
           <div className="section-title">
+
             <h2>🏆 Team Registration</h2>
-            <p>Enter your team details below</p>
+
+            <p>
+              Enter your team details below
+            </p>
+
           </div>
 
           <div className="registration-card">
-            <form className="registration-form" onSubmit={handleSubmit}>
-              <label>Registration Type</label>
+
+            <form
+              className="registration-form"
+              onSubmit={handleSubmit}
+            >
+
+              {/* REGISTRATION TYPE */}
+
+              <label>
+                Registration Type
+              </label>
 
               <select
                 name="registration_type"
@@ -291,149 +307,144 @@ function App() {
                 onChange={handleChange}
                 required
               >
-                <option value="Solo">🧍 Solo</option>
-                <option value="Duo">👥 Duo</option>
-                <option value="Squad">👥 Squad</option>
+
+                <option value="Solo">
+                  🧍 Solo
+                </option>
+
+                <option value="Duo">
+                  👥 Duo
+                </option>
+
+                <option value="Squad">
+                  👥 Squad
+                </option>
+
               </select>
+
+              {/* GUILD NAME */}
+
+              <label>
+                Guild Name
+              </label>
 
               <input
                 name="team_name"
-                placeholder="Guild Name"
+                placeholder="Enter Guild Name"
                 value={form.team_name}
                 onChange={handleChange}
                 required
               />
 
+              {/* CAPTAIN */}
+
+              <label>
+                Captain Name
+              </label>
+
               <input
                 name="captain_name"
-                placeholder="Captain Name"
+                placeholder="Enter Captain Name"
                 value={form.captain_name}
                 onChange={handleChange}
                 required
               />
 
+              {/* WHATSAPP */}
+
+              <label>
+                WhatsApp Number
+              </label>
+
               <input
                 name="whatsapp"
                 type="tel"
-                placeholder="WhatsApp Number"
+                placeholder="Enter WhatsApp Number"
                 value={form.whatsapp}
                 onChange={handleChange}
                 required
               />
 
               {/* PLAYER 1 */}
-              <label>Player Name 1</label>
+
+              <label>
+                Player Name 1
+              </label>
+
               <input
                 name="player1"
-                placeholder="Player Name 1"
+                placeholder="Enter Player Name 1"
                 value={form.player1}
                 onChange={handleChange}
                 required
               />
 
-              <label>Player UID 1</label>
-              <input
-                name="player1_uid"
-                placeholder="Player UID 1"
-                value={form.player1_uid}
-                onChange={handleChange}
-                required
-              />
-
               {/* PLAYER 2 */}
+
               {(form.registration_type === "Duo" ||
                 form.registration_type === "Squad") && (
                 <>
-                  <label>Player Name 2</label>
+                  <label>
+                    Player Name 2
+                  </label>
+
                   <input
                     name="player2"
-                    placeholder="Player Name 2"
+                    placeholder="Enter Player Name 2"
                     value={form.player2}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  <label>Player UID 2</label>
-                  <input
-                    name="player2_uid"
-                    placeholder="Player UID 2"
-                    value={form.player2_uid}
                     onChange={handleChange}
                     required
                   />
                 </>
               )}
 
-              {/* PLAYER 3 */}
+              {/* PLAYER 3, 4, 5 */}
+
               {form.registration_type === "Squad" && (
                 <>
-                  <label>Player Name 3</label>
+                  <label>
+                    Player Name 3
+                  </label>
+
                   <input
                     name="player3"
-                    placeholder="Player Name 3"
+                    placeholder="Enter Player Name 3"
                     value={form.player3}
                     onChange={handleChange}
                     required
                   />
 
-                  <label>Player UID 3</label>
-                  <input
-                    name="player3_uid"
-                    placeholder="Player UID 3"
-                    value={form.player3_uid}
-                    onChange={handleChange}
-                    required
-                  />
-                </>
-              )}
+                  <label>
+                    Player Name 4
+                  </label>
 
-              {/* PLAYER 4 */}
-              {form.registration_type === "Squad" && (
-                <>
-                  <label>Player Name 4</label>
                   <input
                     name="player4"
-                    placeholder="Player Name 4"
+                    placeholder="Enter Player Name 4"
                     value={form.player4}
                     onChange={handleChange}
                     required
                   />
 
-                  <label>Player UID 4</label>
-                  <input
-                    name="player4_uid"
-                    placeholder="Player UID 4"
-                    value={form.player4_uid}
-                    onChange={handleChange}
-                    required
-                  />
-                </>
-              )}
+                  <label>
+                    Player Name 5
+                  </label>
 
-              {/* PLAYER 5 */}
-              {form.registration_type === "Squad" && (
-                <>
-                  <label>Player Name 5</label>
                   <input
                     name="player5"
-                    placeholder="Player Name 5"
+                    placeholder="Enter Player Name 5"
                     value={form.player5}
                     onChange={handleChange}
                     required
                   />
-
-                  <label>Player UID 5</label>
-                  <input
-                    name="player5_uid"
-                    placeholder="Player UID 5"
-                    value={form.player5_uid}
-                    onChange={handleChange}
-                    required
-                  />
                 </>
               )}
 
-              <label>Team Logo</label>
+              {/* TEAM LOGO */}
+
+              <label>
+                Team Logo
+              </label>
 
               <input
                 type="file"
@@ -442,7 +453,11 @@ function App() {
                 required
               />
 
-              <label>💳 Registration Payment</label>
+              {/* PAYMENT */}
+
+              <label>
+                💳 Registration Payment
+              </label>
 
               <a
                 href="upi://pay?pa=9067865439-4@ybl&pn=4UL%20Esports%20India&cu=INR"
@@ -451,7 +466,11 @@ function App() {
                 💳 PAY NOW WITH UPI
               </a>
 
-              <label>Payment Screenshot</label>
+              {/* PAYMENT SCREENSHOT */}
+
+              <label>
+                Payment Screenshot
+              </label>
 
               <input
                 type="file"
@@ -460,37 +479,71 @@ function App() {
                 required
               />
 
+              {/* UTR */}
+
+              <label>
+                UTR / Transaction ID
+              </label>
+
               <input
                 name="utr_number"
-                placeholder="UTR / Transaction ID"
+                placeholder="Enter UTR / Transaction ID"
                 value={form.utr_number}
                 onChange={handleChange}
                 required
               />
 
-              <button type="submit">REGISTER TEAM</button>
+              {/* SUBMIT */}
 
-              {message && <p className="message">{message}</p>}
+              <button type="submit">
+                REGISTER TEAM
+              </button>
+
+              {message && (
+                <p className="message">
+                  {message}
+                </p>
+              )}
+
             </form>
+
           </div>
+
         </section>
 
+        {/* ADMIN */}
+
         <section className="section" id="admin">
+
           <div className="section-title">
-            <h2>🔐 Admin Dashboard</h2>
-            <p>Registered Teams</p>
+
+            <h2>
+              🔐 Admin Dashboard
+            </h2>
+
+            <p>
+              Registered Teams
+            </p>
+
           </div>
 
           {!isAdmin ? (
+
             <div className="registration-card">
-              <h3>🔐 Admin Login</h3>
+
+              <h3>
+                🔐 Admin Login
+              </h3>
 
               <form onSubmit={handleAdminLogin}>
+
                 <input
                   type="email"
                   placeholder="Admin Email"
                   value={adminEmail}
-                  onChange={(e) => setAdminEmail(e.target.value)}
+                  onChange={(e) =>
+                    setAdminEmail(e.target.value)
+                  }
                   required
                 />
 
@@ -498,113 +551,149 @@ function App() {
                   type="password"
                   placeholder="Admin Password"
                   value={adminPassword}
-                  onChange={(e) => setAdminPassword(e.target.value)}
+                  onChange={(e) =>
+                    setAdminPassword(e.target.value)
+                  }
                   required
                 />
 
-                <button type="submit">LOGIN</button>
+                <button type="submit">
+                  LOGIN
+                </button>
 
                 {loginError && (
-                  <p className="message">{loginError}</p>
+                  <p className="message">
+                    {loginError}
+                  </p>
                 )}
+
               </form>
+
             </div>
+
           ) : (
+
             <>
+
               <div className="registration-card">
-                <h3>✅ Admin Dashboard</h3>
+
+                <h3>
+                  ✅ Admin Dashboard
+                </h3>
 
                 <p>
                   Welcome to 4UL Esports India Admin Dashboard.
                 </p>
 
-                <button type="button" onClick={handleLogout}>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                >
                   LOGOUT
                 </button>
+
               </div>
 
               <div className="registration-card">
-                <h3>Registered Teams: {teams.length}</h3>
+
+                <h3>
+                  Registered Teams: {teams.length}
+                </h3>
 
                 {teams.length === 0 ? (
-                  <p>No registered teams found.</p>
+
+                  <p>
+                    No registered teams found.
+                  </p>
+
                 ) : (
+
                   teams.map((team) => (
-                    <div className="card" key={team.id}>
-                      <h3>🏆 {team.team_name}</h3>
+
+                    <div
+                      className="card"
+                      key={team.id}
+                    >
+
+                      <h3>
+                        🏆 {team.team_name}
+                      </h3>
 
                       <p>
-                        <strong>Registration Type:</strong>{" "}
+                        <strong>
+                          Registration Type:
+                        </strong>{" "}
                         {team.registration_type || "Squad"}
                       </p>
 
                       <p>
-                        <strong>Captain:</strong>{" "}
+                        <strong>
+                          Captain:
+                        </strong>{" "}
                         {team.captain_name}
                       </p>
 
                       <p>
-                        <strong>WhatsApp:</strong>{" "}
+                        <strong>
+                          WhatsApp:
+                        </strong>{" "}
                         {team.whatsapp}
                       </p>
 
                       <p>
-                        <strong>Player 1:</strong>{" "}
+                        <strong>
+                          Player 1:
+                        </strong>{" "}
                         {team.player1}
                       </p>
 
-                      <p>
-                        <strong>Player 1 UID:</strong>{" "}
-                        {team.player1_uid}
-                      </p>
+                      {team.player2 && (
+                        <p>
+                          <strong>
+                            Player 2:
+                          </strong>{" "}
+                          {team.player2}
+                        </p>
+                      )}
+
+                      {team.player3 && (
+                        <p>
+                          <strong>
+                            Player 3:
+                          </strong>{" "}
+                          {team.player3}
+                        </p>
+                      )}
+
+                      {team.player4 && (
+                        <p>
+                          <strong>
+                            Player 4:
+                          </strong>{" "}
+                          {team.player4}
+                        </p>
+                      )}
+
+                      {team.player5 && (
+                        <p>
+                          <strong>
+                            Player 5:
+                          </strong>{" "}
+                          {team.player5}
+                        </p>
+                      )}
 
                       <p>
-                        <strong>Player 2:</strong>{" "}
-                        {team.player2}
-                      </p>
-
-                      <p>
-                        <strong>Player 2 UID:</strong>{" "}
-                        {team.player2_uid}
-                      </p>
-
-                      <p>
-                        <strong>Player 3:</strong>{" "}
-                        {team.player3}
-                      </p>
-
-                      <p>
-                        <strong>Player 3 UID:</strong>{" "}
-                        {team.player3_uid}
-                      </p>
-
-                      <p>
-                        <strong>Player 4:</strong>{" "}
-                        {team.player4}
-                      </p>
-
-                      <p>
-                        <strong>Player 4 UID:</strong>{" "}
-                        {team.player4_uid}
-                      </p>
-
-                      <p>
-                        <strong>Player 5:</strong>{" "}
-                        {team.player5}
-                      </p>
-
-                      <p>
-                        <strong>Player 5 UID:</strong>{" "}
-                        {team.player5_uid}
-                      </p>
-
-                      <p>
-                        <strong>UTR:</strong>{" "}
+                        <strong>
+                          UTR:
+                        </strong>{" "}
                         {team.utr_number}
                       </p>
 
                       <p>
-                        <strong>Payment Status:</strong>{" "}
+                        <strong>
+                          Payment Status:
+                        </strong>{" "}
                         {team.payment_status}
                       </p>
 
@@ -623,6 +712,7 @@ function App() {
 
                       {team.payment_screenshot_url && (
                         <p>
+
                           <a
                             href={team.payment_screenshot_url}
                             target="_blank"
@@ -630,10 +720,16 @@ function App() {
                           >
                             💳 View Payment Screenshot
                           </a>
+
                         </p>
                       )}
 
-                      <div style={{ marginTop: "15px" }}>
+                      <div
+                        style={{
+                          marginTop: "15px",
+                        }}
+                      >
+
                         <button
                           type="button"
                           onClick={() =>
@@ -654,65 +750,104 @@ function App() {
                               "Rejected"
                             )
                           }
-                          style={{ marginLeft: "10px" }}
+                          style={{
+                            marginLeft: "10px",
+                          }}
                         >
                           ❌ REJECT
                         </button>
+
                       </div>
+
                     </div>
+
                   ))
+
                 )}
+
               </div>
+
             </>
+
           )}
+
         </section>
 
-        <section className="section" id="about">
+        {/* ABOUT */}
+
+        <section
+          className="section"
+          id="about"
+        >
+
           <div className="section-title">
-            <h2>About 4UL Esports India</h2>
+
+            <h2>
+              About 4UL Esports India
+            </h2>
 
             <p>
-              Building competitive esports tournaments and giving
-              players a platform to compete, improve and rise to the
-              top.
+              Building competitive esports tournaments
+              and giving players a platform to compete,
+              improve and rise to the top.
             </p>
+
           </div>
 
           <div className="cards">
+
             <div className="card">
-              <h3>🎮 Tournaments</h3>
+
+              <h3>
+                🎮 Tournaments
+              </h3>
 
               <p>
-                Participate in exciting esports tournaments organized
-                by 4UL Esports India.
+                Participate in exciting esports tournaments
+                organized by 4UL Esports India.
               </p>
+
             </div>
 
             <div className="card">
-              <h3>🏆 Competition</h3>
+
+              <h3>
+                🏆 Competition
+              </h3>
 
               <p>
-                Compete with talented teams and prove your skills on
-                the battlefield.
+                Compete with talented teams and prove your
+                skills on the battlefield.
               </p>
+
             </div>
 
             <div className="card">
-              <h3>👑 Community</h3>
+
+              <h3>
+                👑 Community
+              </h3>
 
               <p>
-                Join the growing 4UL Esports India gaming community.
+                Join the growing 4UL Esports India gaming
+                community.
               </p>
+
             </div>
+
           </div>
+
         </section>
+
       </main>
 
       <footer className="footer">
         © 2026 4UL Esports India. All Rights Reserved.
       </footer>
+
     </div>
   );
 }
 
 export default App;
+```
