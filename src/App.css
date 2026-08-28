@@ -270,4 +270,14 @@ body {
 
 .registration-form .form-group {
   margin-bottom: 22px;
+/* PLAYER NAME FIELDS - SEPARATE LINES */
+
+.registration-form input[name="player1"],
+.registration-form input[name="player2"],
+.registration-form input[name="player3"],
+.registration-form input[name="player4"],
+.registration-form input[name="player5"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 22px;
 }
