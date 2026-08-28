@@ -19,10 +19,15 @@ function App() {
     captain_name: "",
     whatsapp: "",
     player1: "",
+    player1_uid: "",
     player2: "",
+    player2_uid: "",
     player3: "",
+    player3_uid: "",
     player4: "",
+    player4_uid: "",
     player5: "",
+    player5_uid: "",
     utr_number: "",
   });
 
@@ -65,7 +70,6 @@ function App() {
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
-
     setLoginError("");
 
     const { error } = await supabase.auth.signInWithPassword({
@@ -176,11 +180,22 @@ function App() {
         team_name: form.team_name,
         captain_name: form.captain_name,
         whatsapp: form.whatsapp,
+
         player1: form.player1,
+        player1_uid: form.player1_uid,
+
         player2: form.player2,
+        player2_uid: form.player2_uid,
+
         player3: form.player3,
+        player3_uid: form.player3_uid,
+
         player4: form.player4,
+        player4_uid: form.player4_uid,
+
         player5: form.player5,
+        player5_uid: form.player5_uid,
+
         logo_url: logoData.publicUrl,
         payment_screenshot_url: paymentData.publicUrl,
         utr_number: form.utr_number,
@@ -202,10 +217,15 @@ function App() {
       captain_name: "",
       whatsapp: "",
       player1: "",
+      player1_uid: "",
       player2: "",
+      player2_uid: "",
       player3: "",
+      player3_uid: "",
       player4: "",
+      player4_uid: "",
       player5: "",
+      player5_uid: "",
       utr_number: "",
     });
 
@@ -213,7 +233,6 @@ function App() {
     setPaymentFile(null);
 
     e.target.reset();
-
     fetchTeams();
   };
 
@@ -302,53 +321,116 @@ function App() {
                 required
               />
 
+              {/* PLAYER 1 */}
+              <label>Player Name 1</label>
               <input
                 name="player1"
-                placeholder="Player 1 Name"
+                placeholder="Player Name 1"
                 value={form.player1}
                 onChange={handleChange}
                 required
               />
 
+              <label>Player UID 1</label>
+              <input
+                name="player1_uid"
+                placeholder="Player UID 1"
+                value={form.player1_uid}
+                onChange={handleChange}
+                required
+              />
+
+              {/* PLAYER 2 */}
               {(form.registration_type === "Duo" ||
                 form.registration_type === "Squad") && (
-                <input
-                  name="player2"
-                  placeholder="Player 2 Name"
-                  value={form.player2}
-                  onChange={handleChange}
-                  required
-                />
+                <>
+                  <label>Player Name 2</label>
+                  <input
+                    name="player2"
+                    placeholder="Player Name 2"
+                    value={form.player2}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <label>Player UID 2</label>
+                  <input
+                    name="player2_uid"
+                    placeholder="Player UID 2"
+                    value={form.player2_uid}
+                    onChange={handleChange}
+                    required
+                  />
+                </>
               )}
 
+              {/* PLAYER 3 */}
               {form.registration_type === "Squad" && (
-                <input
-                  name="player3"
-                  placeholder="Player 3 Name"
-                  value={form.player3}
-                  onChange={handleChange}
-                  required
-                />
+                <>
+                  <label>Player Name 3</label>
+                  <input
+                    name="player3"
+                    placeholder="Player Name 3"
+                    value={form.player3}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <label>Player UID 3</label>
+                  <input
+                    name="player3_uid"
+                    placeholder="Player UID 3"
+                    value={form.player3_uid}
+                    onChange={handleChange}
+                    required
+                  />
+                </>
               )}
 
+              {/* PLAYER 4 */}
               {form.registration_type === "Squad" && (
-                <input
-                  name="player4"
-                  placeholder="Player 4 Name"
-                  value={form.player4}
-                  onChange={handleChange}
-                  required
-                />
+                <>
+                  <label>Player Name 4</label>
+                  <input
+                    name="player4"
+                    placeholder="Player Name 4"
+                    value={form.player4}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <label>Player UID 4</label>
+                  <input
+                    name="player4_uid"
+                    placeholder="Player UID 4"
+                    value={form.player4_uid}
+                    onChange={handleChange}
+                    required
+                  />
+                </>
               )}
 
+              {/* PLAYER 5 */}
               {form.registration_type === "Squad" && (
-                <input
-                  name="player5"
-                  placeholder="Player 5 Name"
-                  value={form.player5}
-                  onChange={handleChange}
-                  required
-                />
+                <>
+                  <label>Player Name 5</label>
+                  <input
+                    name="player5"
+                    placeholder="Player Name 5"
+                    value={form.player5}
+                    onChange={handleChange}
+                    required
+                  />
+
+                  <label>Player UID 5</label>
+                  <input
+                    name="player5_uid"
+                    placeholder="Player UID 5"
+                    value={form.player5_uid}
+                    onChange={handleChange}
+                    required
+                  />
+                </>
               )}
 
               <label>Team Logo</label>
@@ -472,8 +554,18 @@ function App() {
                       </p>
 
                       <p>
+                        <strong>Player 1 UID:</strong>{" "}
+                        {team.player1_uid}
+                      </p>
+
+                      <p>
                         <strong>Player 2:</strong>{" "}
                         {team.player2}
+                      </p>
+
+                      <p>
+                        <strong>Player 2 UID:</strong>{" "}
+                        {team.player2_uid}
                       </p>
 
                       <p>
@@ -482,13 +574,28 @@ function App() {
                       </p>
 
                       <p>
+                        <strong>Player 3 UID:</strong>{" "}
+                        {team.player3_uid}
+                      </p>
+
+                      <p>
                         <strong>Player 4:</strong>{" "}
                         {team.player4}
                       </p>
 
                       <p>
+                        <strong>Player 4 UID:</strong>{" "}
+                        {team.player4_uid}
+                      </p>
+
+                      <p>
                         <strong>Player 5:</strong>{" "}
                         {team.player5}
+                      </p>
+
+                      <p>
+                        <strong>Player 5 UID:</strong>{" "}
+                        {team.player5_uid}
                       </p>
 
                       <p>
