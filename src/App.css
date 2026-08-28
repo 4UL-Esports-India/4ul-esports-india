@@ -225,4 +225,49 @@ body {
   .hero-content p {
     font-size: 16px;
   }
+}/* REGISTRATION FORM */
+
+.registration-form label {
+  color: #ff1744;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.registration-form input,
+.registration-form select,
+.registration-form textarea {
+  width: 100%;
+  color: #ff1744;
+  border: none;
+  border-bottom: 6px solid #ff1744;
+  border-radius: 0;
+  background: transparent;
+  padding: 12px 0;
+  margin-bottom: 22px;
+  outline: none;
+}
+
+.registration-form input::placeholder,
+.registration-form textarea::placeholder {
+  color: #ff1744;
+  opacity: 1;
+}
+
+.registration-form input[type="file"] {
+  color: #ff1744;
+  border-bottom: 6px solid #ff1744;
+  padding-bottom: 12px;
+}
+
+.registration-form input[type="file"]::file-selector-button {
+  color: #ff1744;
+  border: 2px solid #ff1744;
+  background: transparent;
+  padding: 8px 12px;
+  margin-right: 10px;
+}
+
+.registration-form .form-group {
+  margin-bottom: 22px;
 }

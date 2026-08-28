@@ -260,7 +260,7 @@ function App() {
           </div>
 
           <div className="registration-card">
-            <form onSubmit={handleSubmit}>
+            <form className="registration-form" onSubmit={handleSubmit}>
               <input
                 name="team_name"
                 placeholder="Guild Name"
